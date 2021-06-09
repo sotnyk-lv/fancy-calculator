@@ -3,7 +3,6 @@ const CosmosClient = require("@azure/cosmos").CosmosClient;
 const { v4: uuidv4 } = require('uuid');
 const loadIniFile = require('read-ini-file')
 const path = require('path')
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 const fixture = path.join(__dirname, 'keys.ini')
 const keys = loadIniFile.sync(fixture)
@@ -22,8 +21,6 @@ const containerId = keys.cosmosCntID
 
 const db = client.database(databaseId);
 const container = db.container(containerId);
-
-var xhr = new XMLHttpRequest();
 
 async function main(){
     const sbClient = new ServiceBusClient(connStr);
