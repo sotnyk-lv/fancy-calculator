@@ -17,16 +17,13 @@ const container = db.container(containerId);
 
 module.exports = async function (context, myTimer) {
     var timeStamp = new Date().toISOString();
-    var equations = [];
-    console.log(keys.cosmosDbID)
+    
     const { resources } = await container.items.query("SELECT c.username, count(c.username) from c group by c.username").fetchAll();
     
     resources.map(function(res1){
         res1["count"] = res1["$1"]
         delete res1["$1"]
     })
-
-    console.log(resources)
 
     for (const eq of resources) 
     {
