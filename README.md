@@ -1,4 +1,4 @@
-# fancy-calculator
+# [fancy-calculator](https://fancy-calculator-ui.azurewebsites.net/)
 
 ### dev-ops course project by:
 * [Denys Datsko](https://github.com/ddatsko)
@@ -13,3 +13,6 @@ It uses [Azure](https://azure.microsoft.com/en-us/) servises and [WolframAlpha](
 ## Diagram:
 ![diagram](./docs/diagram.png)
 
+## Link to web-site:
+
+[fancy-calculator](https://fancy-calculator-ui.azurewebsites.net/)
