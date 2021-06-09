@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fancy calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.min.js"
+            type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=ZCOOL+QingKe+HuangYou&display=swap');
+    </style>
+    <script>
+        var MQ = MathQuill.getInterface(2);
+    </script>
+
+</head>
+<body>
+<header>
+    <a href="/statistics">Statistics</a>
+</header>
+<h1>Fancy Calculator</h1>
+<form action="">
+    <label>Your name: <input type="text" name="typed-name" id="typed-name"></label>
+</form>
+<p><span class="input" id="input">{{ original_equation }}</span>
+    {% if answer %}
+    <span class="result" id="result">{{ answer }}</span>
+    {% endif %}
+
+</p>
+<script>
+    var problemSpan = document.getElementById('result');
+    MQ.StaticMath(problemSpan);
+</script>
+
+<script>
+    var answerSpan = document.getElementById('input');
+    var answerMathField = MQ.MathField(answerSpan, {
+        handlers: {
+            edit: function () {
+                var enteredMath = answerMathField.latex(); // Get entered math in LaTeX format
+                checkAnswer(enteredMath);
+            }
+        }
+    });
+</script>
+<button class="submit" id="submit" onclick="submitForm();">Calculate</button>
+<form hidden="hidden" action="/calculate" method="post" id="form"><input name="problem" id="problem" value="problem">
+    <input name="name" id="name" value=""></form>
+
+<script>
+    function submitForm() {
+        let input = answerMathField.latex();
+        console.log(input);
+        document.getElementById("problem").value = input;
+        document.getElementById("name").value = document.getElementById("typed-name").value;
+        document.getElementById("form").submit();
+
+    }
+</script>
+</body>
+</html>
